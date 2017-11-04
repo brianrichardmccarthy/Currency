@@ -7,22 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61608A751FADEFFA00B2C683 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61608A741FADEFFA00B2C683 /* LaunchScreen.storyboard */; };
+		61D41BEB1FADEB8500985504 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61D41BEA1FADEB8500985504 /* Main.storyboard */; };
 		FF66C5521FA34F4D00E9354E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66C5511FA34F4D00E9354E /* AppDelegate.swift */; };
 		FF66C5541FA34F4D00E9354E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66C5531FA34F4D00E9354E /* ViewController.swift */; };
-		FF66C5571FA34F4D00E9354E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF66C5551FA34F4D00E9354E /* Main.storyboard */; };
 		FF66C5591FA34F4D00E9354E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF66C5581FA34F4D00E9354E /* Assets.xcassets */; };
-		FF66C55C1FA34F4D00E9354E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF66C55A1FA34F4D00E9354E /* LaunchScreen.storyboard */; };
 		FF66C5641FA351CE00E9354E /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66C5631FA351CE00E9354E /* Currency.swift */; };
 		FF66C5661FA3531400E9354E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FF66C5651FA3531400E9354E /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		61608A741FADEFFA00B2C683 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		61D41BEA1FADEB8500985504 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		FF66C54E1FA34F4D00E9354E /* Currency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Currency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF66C5511FA34F4D00E9354E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF66C5531FA34F4D00E9354E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		FF66C5561FA34F4D00E9354E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FF66C5581FA34F4D00E9354E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FF66C55B1FA34F4D00E9354E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF66C55D1FA34F4D00E9354E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF66C5631FA351CE00E9354E /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		FF66C5651FA3531400E9354E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -61,11 +61,11 @@
 				FF66C5631FA351CE00E9354E /* Currency.swift */,
 				FF66C5511FA34F4D00E9354E /* AppDelegate.swift */,
 				FF66C5531FA34F4D00E9354E /* ViewController.swift */,
-				FF66C5551FA34F4D00E9354E /* Main.storyboard */,
 				FF66C5581FA34F4D00E9354E /* Assets.xcassets */,
-				FF66C55A1FA34F4D00E9354E /* LaunchScreen.storyboard */,
 				FF66C55D1FA34F4D00E9354E /* Info.plist */,
 				FF66C5651FA3531400E9354E /* README.md */,
+				61D41BEA1FADEB8500985504 /* Main.storyboard */,
+				61608A741FADEFFA00B2C683 /* LaunchScreen.storyboard */,
 			);
 			path = Currency;
 			sourceTree = "<group>";
@@ -102,7 +102,7 @@
 				TargetAttributes = {
 					FF66C54D1FA34F4D00E9354E = {
 						CreatedOnToolsVersion = 9.0.1;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -129,10 +129,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF66C55C1FA34F4D00E9354E /* LaunchScreen.storyboard in Resources */,
 				FF66C5591FA34F4D00E9354E /* Assets.xcassets in Resources */,
+				61608A751FADEFFA00B2C683 /* LaunchScreen.storyboard in Resources */,
 				FF66C5661FA3531400E9354E /* README.md in Resources */,
-				FF66C5571FA34F4D00E9354E /* Main.storyboard in Resources */,
+				61D41BEB1FADEB8500985504 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,25 +150,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		FF66C5551FA34F4D00E9354E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FF66C5561FA34F4D00E9354E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		FF66C55A1FA34F4D00E9354E /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FF66C55B1FA34F4D00E9354E /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		FF66C55E1FA34F4D00E9354E /* Debug */ = {
@@ -283,13 +264,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3H68RG2SRC;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Currency/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ie.wit.Currency;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -298,13 +280,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3H68RG2SRC;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Currency/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ie.wit.Currency;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
