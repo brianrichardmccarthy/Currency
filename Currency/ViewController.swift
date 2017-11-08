@@ -113,7 +113,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if let c = currencyDict["GBP"]{
             gbpSymbolLabel.text = c.symbol
             gbpValueLabel.text = String(format: "%.02f", c.rate)
-            gbpFlagLabel.text = c.flag
+            // gbpFlagLabel.text = c.flag
         }
         if let c = currencyDict["USD"]{
             usdSymbolLabel.text = c.symbol
@@ -193,6 +193,41 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
          */
         
+        
+        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        indicator.center = view.center
+        view.addSubview(indicator)
+        indicator.startAnimating()
+        
+        let url = URL(string: "https://api.fixer.io/latest")!
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            if let error = error {
+                DispatchQueue.main.async {
+                    indicator.stopAnimating()
+                    //self.gbpFlagLabel.text = "Error: \(error.localizedDescription)"
+                }
+                return
+            }
+            let data = data!
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                DispatchQueue.main.async {
+                    indicator.stopAnimating()
+                    //self.gbpFlagLabel.text = "Sever error"
+                }
+                return
+            }
+            // print("\n\n\t\(response.mimeType)\n\n\n")
+            if response.mimeType == "application/json",
+                let string = String (data: data, encoding: .utf8) {
+                DispatchQueue.main.async {
+                    indicator.stopAnimating()
+                    //self.gbpFlagLabel.text = "working\(string)"
+                }
+            }
+        }
+        task.resume()
     }
     
     @IBAction func convert(_ sender: Any) {
