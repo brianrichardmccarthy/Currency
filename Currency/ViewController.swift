@@ -35,7 +35,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usdFlagLabel: UILabel!
     
     
+    func doneClicked() {
+        view.endEditing(true)
+    }
     
+    func baseTextFieldWillAppear(notication: NSNotification) {
+        baseTextField.text = ""
+        print("Showing Keyboard")
+    }
+    
+    func baseTextFieldWillDisappear(notication: NSNotification) {
+        // ToDo convert
+        print("Hiding Keyboard")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +79,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
         baseTextField.delegate = self
         
         self.convert(self)
+        
+        
+        let toolbar = UIToolbar()
+        
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+        
+        toolbar.setItems([doneButton], animated: false)
+        
+        baseTextField.inputAccessoryView = toolbar
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.baseTextFieldWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.baseTextFieldWillDisappear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -98,7 +125,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func getConversionTable() {
         //var result = "<NOTHING>"
-        
+        /*
         let urlStr:String = "https://api.fixer.io/latest"
         
         var request = URLRequest(url: URL(string: urlStr)!)
@@ -108,6 +135,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         indicator.center = view.center
         view.addSubview(indicator)
         indicator.startAnimating()
+        
         
         NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main) { response, data, error in
             
@@ -163,6 +191,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             
         }
+         */
         
     }
     
