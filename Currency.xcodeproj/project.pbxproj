@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		61608A751FADEFFA00B2C683 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61608A741FADEFFA00B2C683 /* LaunchScreen.storyboard */; };
-		61A479CE1FB39BD5007577CA /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 61A479CD1FB39BD5007577CA /* loading.gif */; };
 		61D41BEB1FADEB8500985504 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61D41BEA1FADEB8500985504 /* Main.storyboard */; };
 		FF66C5521FA34F4D00E9354E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66C5511FA34F4D00E9354E /* AppDelegate.swift */; };
 		FF66C5541FA34F4D00E9354E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66C5531FA34F4D00E9354E /* ViewController.swift */; };
@@ -19,7 +18,6 @@
 
 /* Begin PBXFileReference section */
 		61608A741FADEFFA00B2C683 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		61A479CD1FB39BD5007577CA /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		61D41BEA1FADEB8500985504 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		FF66C54E1FA34F4D00E9354E /* Currency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Currency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF66C5511FA34F4D00E9354E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +63,6 @@
 				FF66C5531FA34F4D00E9354E /* ViewController.swift */,
 				FF66C5581FA34F4D00E9354E /* Assets.xcassets */,
 				FF66C55D1FA34F4D00E9354E /* Info.plist */,
-				61A479CD1FB39BD5007577CA /* loading.gif */,
 				FF66C5651FA3531400E9354E /* README.md */,
 				61D41BEA1FADEB8500985504 /* Main.storyboard */,
 				61608A741FADEFFA00B2C683 /* LaunchScreen.storyboard */,
@@ -134,7 +131,6 @@
 			files = (
 				FF66C5591FA34F4D00E9354E /* Assets.xcassets in Resources */,
 				61608A751FADEFFA00B2C683 /* LaunchScreen.storyboard in Resources */,
-				61A479CE1FB39BD5007577CA /* loading.gif in Resources */,
 				FF66C5661FA3531400E9354E /* README.md in Resources */,
 				61D41BEB1FADEB8500985504 /* Main.storyboard in Resources */,
 			);
@@ -270,7 +266,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Currency/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ie.wit.Currency;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -286,7 +282,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Currency/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ie.wit.Currency;
 				PRODUCT_NAME = "$(TARGET_NAME)";

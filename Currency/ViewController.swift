@@ -35,7 +35,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usdValueLabel: UILabel!
     @IBOutlet weak var usdFlagLabel: UILabel!
     
-
     
     func doneClicked() {
         view.endEditing(true)
@@ -114,6 +113,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         // get latest currency values
         getConversionTable()
+        // getConversionTableUpdated()
         convertValue = 1
         
         // set up base currency screen items
@@ -194,14 +194,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         var request = URLRequest(url: URL(string: urlStr)!)
         request.httpMethod = "GET"
         
-        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        indicator.center = view.center
-        view.addSubview(indicator)
-        indicator.startAnimating()
+        customAcitivityIndicator()
         
         NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main) { response, data, error in
-            
-            indicator.stopAnimating()
+            // print(data?.count)
+        
+            self.customAcitivityIndicator(startAnimate: false)
             
             if error == nil{
                 //print(response!)
@@ -293,8 +291,86 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     */
     
+    func getConversionTableUpdated() {
+        customAcitivityIndicator()
+        let url = URL(string: "https://api.fixer.io/latest")!
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            self.customAcitivityIndicator(startAnimate: false)
+            if let error = error {
+                DispatchQueue.main.async {
+                    print("Error: \(error.localizedDescription)")
+                }
+                return
+            }
+            let data = data!
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                DispatchQueue.main.async {
+                    print("Server Error")
+                }
+                return
+            }
+            
+            if response.mimeType == "application/json",
+                let string = String (data: data, encoding: .utf8) {
+                DispatchQueue.main.async {
+                    // self.textView.text = string
+                    print("All Good")
+                    print(data.count)
+                    /*
+                    do {
+                        let jsonDict = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String:Any]
+                        //print(jsonDict)
+                        
+                        if let ratesData = jsonDict["rates"] as? NSDictionary {
+                            //print(ratesData)
+                            for rate in ratesData{
+                                //print("#####")
+                                let name = String(describing: rate.key)
+                                let rate = (rate.value as? NSNumber)?.doubleValue
+                                //var symbol:String
+                                //var flag:String
+                                
+                                switch(name){
+                                case "USD":
+                                    //symbol = "$"
+                                    //flag = "🇺🇸"
+                                    let c:Currency  = self.currencyDict["USD"]!
+                                    c.rate = rate!
+                                    self.currencyDict["USD"] = c
+                                case "GBP":
+                                    //symbol = "£"
+                                    //flag = "🇬🇧"
+                                    let c:Currency  = self.currencyDict["GBP"]!
+                                    c.rate = rate!
+                                    self.currencyDict["GBP"] = c
+                                default:
+                                    print("Ignoring currency: \(String(describing: rate))")
+                                }
+                                
+                                /*
+                                 let c:Currency = Currency(name: name, rate: rate!, flag: flag, symbol: symbol)!
+                                 self.currencyDict[name] = c
+                                 */
+                            }
+                            self.lastUpdatedDate = Date()
+                        }
+                        
+                    }
+                    catch let error as NSError {
+                        print(error)
+                    }
+                 */
+                }
+            } else {
+                print("\(response.mimeType)")
+            }
+        }
+        task.resume()
+    }
+    
     @IBAction func refresh(_ sender: Any) {
-        getConversionTable()
+        getConversionTableUpdated()
         baseTextField.text = "1.0"
         convert(sender)
     }
@@ -329,6 +405,41 @@ class ViewController: UIViewController, UITextFieldDelegate {
      
      }
      */
+    
+    @discardableResult func customAcitivityIndicator(startAnimate:Bool? = true)  {
+        let mainContainter: UIView = UIView(frame: self.view.frame)
+        mainContainter.center = self.view.center
+        mainContainter.backgroundColor = UIColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
+        mainContainter.tag = 789456123
+        mainContainter.isUserInteractionEnabled = false
+        
+        let viewBackground: UIView = UIView(frame: CGRect(x:0,y:0, width:80,height:80))
+        viewBackground.center = self.view.center
+        viewBackground.backgroundColor = UIColor.init(red: 0.25, green: 0.25, blue: 0.25, alpha: 0.5)
+        viewBackground.clipsToBounds = true
+        viewBackground.layer.cornerRadius = 15
+        
+        let activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
+        activityIndicatorView.frame = CGRect(x:0.0, y:0.0, width: 40.0, height: 40.0)
+        activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        activityIndicatorView.center = CGPoint(x:viewBackground.frame.size.width/2, y:viewBackground.frame.size.height/2)
+        
+        if startAnimate! {
+            viewBackground.addSubview(activityIndicatorView)
+            mainContainter.addSubview(viewBackground)
+            self.view.addSubview(mainContainter)
+            activityIndicatorView.startAnimating()
+        } else {
+            for subview in self.view.subviews {
+                if subview.tag == 789456123 {
+                    subview.removeFromSuperview()
+                }
+            }
+        }
+        
+        // return activityIndicatorView
+        
+    }
     
     
 }
