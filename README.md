@@ -9,18 +9,21 @@ Used as a teaching assignment for students of Waterford Institute of Technology 
 features | Marks | Done
 -------- | ----- | ----
 
-GitHub Integration | 10 | ongoing
 Wiring up Outlets | 5 | done
-Four Extra Currencies | 10 |
 AutoLayout issues resolved | 10 | done
-Decimal Keyboard, Dismissal & Obfuscation issue resolution | 10 | done
+Decimal Keyboard, Dismissal & Obfuscation issue resolution | 10 | kinda done
+
+Four Extra Currencies | 10 |
 Nicer Activity Indicator | 10 |
 Other UI work | 15 |
     * Icons
     * Launch screen
     * General UI (inc. Autolayout)
-Updating deprecated function call | 10 | done
-Extra Feature | 10 |
+Updating deprecated function call | 10 | 
+
+Extra Feature | 10 | not done
+
+GitHub Integration | 10 | ongoing
 Miscellaneous (code style, etc) | 10 | ongoing
 
 ## Resources

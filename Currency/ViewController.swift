@@ -146,10 +146,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         baseTextField.inputAccessoryView = toolbar
         
-        //NotificationCenter.default.addObserver(self, selector: #selector(baseTextFieldWillAppear(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        //NotificationCenter.default.addObserver(self, selector: #selector(baseTextFieldWillAppear(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        // NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         // NotificationCenter.default.addObserver(self, selector: #selector(ViewController.baseTextFieldWillAppear(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         // NotificationCenter.default.addObserver(self, selector: #selector(baseTextFieldWillDisappear(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)

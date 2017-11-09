@@ -116,13 +116,13 @@
                                             <stackView opaque="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="Z4y-zW-rHl">
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pl8-H5-BSf">
-                                                        <state key="normal" title="Button"/>
+                                                        <state key="normal" title="Convert"/>
                                                         <connections>
                                                             <action selector="convert:" destination="mNV-kN-IXD" eventType="touchUpInside" id="FhF-Jj-Z05"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MvR-Ox-CIw">
-                                                        <state key="normal" title="Button"/>
+                                                        <state key="normal" title="Refresh"/>
                                                         <connections>
                                                             <action selector="refresh:" destination="mNV-kN-IXD" eventType="touchUpInside" id="obi-7z-LRD"/>
                                                         </connections>
