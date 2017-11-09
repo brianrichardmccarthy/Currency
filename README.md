@@ -14,7 +14,7 @@ AutoLayout issues resolved | 10 | done
 Decimal Keyboard, Dismissal & Obfuscation issue resolution | 10 | 2/3 done
 Nicer Activity Indicator | 10 | done
 
-Four Extra Currencies | 10 |
+Four Extra Currencies | 10 | done
 Other UI work | 15 | 1/3 done
     * Icons
     * Launch screen

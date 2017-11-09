@@ -35,6 +35,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usdValueLabel: UILabel!
     @IBOutlet weak var usdFlagLabel: UILabel!
     
+    @IBOutlet weak var firstExtraSymbol: UILabel!
+    @IBOutlet weak var firstExtraValue: UILabel!
+    @IBOutlet weak var firstExtraFlag: UILabel!
+    
+    @IBOutlet weak var seondExtraSymbol: UILabel!
+    @IBOutlet weak var secondExtraValue: UILabel!
+    @IBOutlet weak var secondExtraFlag: UILabel!
+    
+    @IBOutlet weak var thirdExtraSymbol: UILabel!
+    @IBOutlet weak var thirdExtraValue: UILabel!
+    @IBOutlet weak var thirdExtraFlag: UILabel!
+    
+    @IBOutlet weak var fourthExtraSymbol: UILabel!
+    @IBOutlet weak var fourthExtraValue: UILabel!
+    @IBOutlet weak var fourthExtraFlag: UILabel!
     
     func doneClicked() {
         view.endEditing(true)
@@ -170,6 +185,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         //self.currencyDict[name] = c
         currencyDict["GBP"] = Currency(name:"GBP", rate:1, flag:"🇬🇧", symbol: "£")
         currencyDict["USD"] = Currency(name:"USD", rate:1, flag:"🇺🇸", symbol: "$")
+        currencyDict["BGN"] = Currency(name:"BGN", rate:1, flag:"🇧🇬", symbol:"лв")
+        currencyDict["CZK"] = Currency(name:"CZK", rate:1, flag:"🇨🇿", symbol:"Kč")
+        currencyDict["DKK"] = Currency(name:"DKK", rate:1, flag:"🇩🇰", symbol:"kr")
+        currencyDict["SEK"] = Currency(name:"SEK", rate:1, flag:"🇸🇪", symbol:"kr")
     }
     
     func displayCurrencyInfo() {
@@ -183,6 +202,30 @@ class ViewController: UIViewController, UITextFieldDelegate {
             usdSymbolLabel.text = c.symbol
             usdValueLabel.text = String(format: "%.02f", c.rate)
             usdFlagLabel.text = c.flag
+        }
+        
+        if let c = currencyDict["BGN"] {
+            firstExtraSymbol.text = c.symbol
+            firstExtraValue.text = String(format: "%.02f", c.rate)
+            firstExtraFlag.text = c.flag
+        }
+        
+        if let c = currencyDict["DKK"] {
+            seondExtraSymbol.text = c.symbol
+            secondExtraValue.text = String(format: "%.02f", c.rate)
+            secondExtraFlag.text = c.flag
+        }
+        
+        if let c = currencyDict["CZK"] {
+            thirdExtraSymbol.text = c.symbol
+            thirdExtraValue.text = String(format: "%.02f", c.rate)
+            thirdExtraFlag.text = c.flag
+        }
+        
+        if let c = currencyDict["SEK"] {
+            fourthExtraSymbol.text = c.symbol
+            fourthExtraValue.text = String(format: "%.02f", c.rate)
+            fourthExtraFlag.text = c.flag
         }
     }
     
@@ -230,6 +273,30 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                 let c:Currency  = self.currencyDict["GBP"]!
                                 c.rate = rate!
                                 self.currencyDict["GBP"] = c
+                            case "BGN":
+                                //symbol = "£"
+                                //flag = "🇬🇧"
+                                let c:Currency  = self.currencyDict["GBP"]!
+                                c.rate = rate!
+                                self.currencyDict["BGN"] = c
+                            case "DKK":
+                                //symbol = "£"
+                                //flag = "🇬🇧"
+                                let c:Currency  = self.currencyDict["DKK"]!
+                                c.rate = rate!
+                                self.currencyDict["DKK"] = c
+                            case "CZK":
+                                //symbol = "£"
+                                //flag = "🇬🇧"
+                                let c:Currency  = self.currencyDict["CZK"]!
+                                c.rate = rate!
+                                self.currencyDict["CZK"] = c
+                            case "SEK":
+                                //symbol = "£"
+                                //flag = "🇬🇧"
+                                let c:Currency  = self.currencyDict["SEK"]!
+                                c.rate = rate!
+                                self.currencyDict["SEK"] = c
                             default:
                                 print("Ignoring currency: \(String(describing: rate))")
                             }
@@ -370,7 +437,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func refresh(_ sender: Any) {
-        getConversionTableUpdated()
+        getConversionTable()
         baseTextField.text = "1.0"
         convert(sender)
     }
@@ -380,6 +447,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         var resultGBP = 0.0
         var resultUSD = 0.0
         
+        var resultBGN = 0.0
+        var resultCZK = 0.0
+        var resultDKK = 0.0
+        var resultSEK = 0.0
+        
         if let euro = Double(baseTextField.text!) {
             convertValue = euro
             if let gbp = self.currencyDict["GBP"] {
@@ -387,6 +459,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             if let usd = self.currencyDict["USD"] {
                 resultUSD = convertValue * usd.rate
+            }
+            
+            if let bgn = self.currencyDict["BGN"] {
+                resultBGN = convertValue * bgn.rate
+            }
+            
+            if let czk = self.currencyDict["CZK"] {
+                resultCZK = convertValue * czk.rate
+            }
+            
+            if let dkk = self.currencyDict["DKK"] {
+                resultDKK = convertValue * dkk.rate
+            }
+            
+            if let sek = self.currencyDict["SEK"] {
+                resultSEK = convertValue * sek.rate
             }
         }
         //GBP
@@ -396,6 +484,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         gbpValueLabel.text = String(format: "%.02f", resultGBP)
         usdValueLabel.text = String(format: "%.02f", resultUSD)
     
+        firstExtraValue.text = String(format: "%.02f", resultBGN) // BGN
+        secondExtraValue.text = String(format: "%.02f", resultDKK) // DKK
+        thirdExtraValue.text = String(format: "%.02f", resultCZK) // CZK
+        fourthExtraValue.text = String(format: "%.02f", resultSEK) // SEK
+        
     }
     
     /*
