@@ -12,7 +12,7 @@ features | Marks | Done
 GitHub Integration | 10 | ongoing
 Wiring up Outlets | 5 | done
 Four Extra Currencies | 10 |
-AutoLayout issues resolved | 10 |
+AutoLayout issues resolved | 10 | done
 Decimal Keyboard, Dismissal & Obfuscation issue resolution | 10 | done
 Nicer Activity Indicator | 10 |
 Other UI work | 15 |
@@ -29,3 +29,5 @@ Miscellaneous (code style, etc) | 10 | ongoing
 [How to detect when keyboard is shown and hidden](https://stackoverflow.com/questions/4374436/how-to-detect-when-keyboard-is-shown-and-hidden)
 [NotificationCenter issue on Swift 3 [duplicate]](https://stackoverflow.com/questions/38204703/notificationcenter-issue-on-swift-3)
 [Fetching Website Data into Memory](https://developer.apple.com/documentation/foundation/url_loading_system/fetching_website_data_into_memory)
+[loading.gif](http://i0.kym-cdn.com/photos/images/newsfeed/000/674/528/de2.gif)
+[Custom Activity Indicator View](https://github.com/snyuryev/Custom-Activity-Indicator-View)

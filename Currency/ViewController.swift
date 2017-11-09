@@ -20,6 +20,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     //MARK Outlets
     //@IBOutlet weak var convertedLabel: UILabel!
+    @IBOutlet var scrollView: UIScrollView!
     
     @IBOutlet weak var baseSymbol: UILabel!
     @IBOutlet weak var baseTextField: UITextField!
@@ -34,25 +35,79 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usdValueLabel: UILabel!
     @IBOutlet weak var usdFlagLabel: UILabel!
     
+
     
     func doneClicked() {
         view.endEditing(true)
     }
     
+    /*
     func baseTextFieldWillAppear(notication: NSNotification) {
         baseTextField.text = ""
-        print("Showing Keyboard")
+        self.scrollView.isScrollEnabled = true
+        var info = notication.userInfo!
+        let keyoardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, keyoardSize!.height, 0.0)
+        
+        self.scrollView.contentInset = contentInsets
+        self.scrollView.scrollIndicatorInsets = contentInsets
+        var aRect : CGRect = self.view.frame
+        aRect.size.height -= keyoardSize!.height
+        if let activeField = self.baseTextField {
+            if (!aRect.contains(activeField.frame.origin)) {
+                self.scrollView.scrollRectToVisible(activeField.frame, animated: true)
+            }
+        }
+        
     }
     
     func baseTextFieldWillDisappear(notication: NSNotification) {
         // ToDo convert
-        print("Hiding Keyboard")
+        var info = notication.userInfo!
+        let keyoardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, -keyoardSize!.height, 0.0)
+        self.scrollView.contentInset = contentInsets
+        self.scrollView.scrollIndicatorInsets = contentInsets
+        self.scrollView.isScrollEnabled = false
+    }
+    */
+    
+    func keyboardWasShown(notification: NSNotification){
+        baseTextField.text = ""
+        self.scrollView.isScrollEnabled = true
+        var info = notification.userInfo!
+        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize!.height, 0.0)
+        
+        self.scrollView.contentInset = contentInsets
+        self.scrollView.scrollIndicatorInsets = contentInsets
+        
+        var aRect : CGRect = self.view.frame
+        aRect.size.height -= keyboardSize!.height
+        if let activeField = self.baseTextField {
+            if (!aRect.contains(activeField.frame.origin)){
+                self.scrollView.scrollRectToVisible(activeField.frame, animated: true)
+            }
+        }
+    }
+    
+    func keyboardWillBeHidden(notification: NSNotification){
+        var info = notification.userInfo!
+        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, -keyboardSize!.height, 0.0)
+        self.scrollView.contentInset = contentInsets
+        self.scrollView.scrollIndicatorInsets = contentInsets
+        self.view.endEditing(true)
+        self.scrollView.isScrollEnabled = false
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         // print("currencyDict has \(self.currencyDict.count) entries")
+        
+        // scrollView.contentSize = CGSize(width: self.view.frame.size.width*2, height: 700)
+        scrollView.contentSize.height = 700
         
         // create currency dictionary
         self.createCurrencyDictionary()
@@ -69,7 +124,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // set up last updated date
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "dd/MM/yyyy hh:mm a"
-        lastUpdatedDateLabel.text = dateformatter.string(from: lastUpdatedDate)
+        lastUpdatedDateLabel.text = "Last Updated: \(dateformatter.string(from: lastUpdatedDate))"
         
         // display currency info
         self.displayCurrencyInfo()
@@ -91,8 +146,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         baseTextField.inputAccessoryView = toolbar
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.baseTextFieldWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.baseTextFieldWillDisappear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(baseTextFieldWillAppear(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        // NotificationCenter.default.addObserver(self, selector: #selector(ViewController.baseTextFieldWillAppear(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        // NotificationCenter.default.addObserver(self, selector: #selector(baseTextFieldWillDisappear(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
         
     }
     
@@ -113,7 +174,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if let c = currencyDict["GBP"]{
             gbpSymbolLabel.text = c.symbol
             gbpValueLabel.text = String(format: "%.02f", c.rate)
-            // gbpFlagLabel.text = c.flag
+            gbpFlagLabel.text = c.flag
         }
         if let c = currencyDict["USD"]{
             usdSymbolLabel.text = c.symbol
@@ -122,10 +183,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
     func getConversionTable() {
         //var result = "<NOTHING>"
-        /*
+        
         let urlStr:String = "https://api.fixer.io/latest"
         
         var request = URLRequest(url: URL(string: urlStr)!)
@@ -135,7 +195,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         indicator.center = view.center
         view.addSubview(indicator)
         indicator.startAnimating()
-        
         
         NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main) { response, data, error in
             
@@ -191,21 +250,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             
         }
-         */
         
+    }
+    
+    /*
+    func getConversionTable() {
+        //var result = "<NOTHING>"
         
-        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        indicator.center = view.center
-        view.addSubview(indicator)
-        indicator.startAnimating()
+        // let url = URL(String: "https://api.fixer.io/latest")
         
         let url = URL(string: "https://api.fixer.io/latest")!
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            
             if let error = error {
                 DispatchQueue.main.async {
-                    indicator.stopAnimating()
-                    //self.gbpFlagLabel.text = "Error: \(error.localizedDescription)"
+                    print("Error: \(error.localizedDescription)")
                 }
                 return
             }
@@ -213,24 +271,33 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                 DispatchQueue.main.async {
-                    indicator.stopAnimating()
-                    //self.gbpFlagLabel.text = "Sever error"
+                    print("`Sever Error")
                 }
                 return
             }
-            // print("\n\n\t\(response.mimeType)\n\n\n")
+            
             if response.mimeType == "application/json",
                 let string = String (data: data, encoding: .utf8) {
                 DispatchQueue.main.async {
-                    indicator.stopAnimating()
-                    //self.gbpFlagLabel.text = "working\(string)"
+                    self.
                 }
             }
         }
         task.resume()
     }
     
+    func parseJSON(var json) {
+    }
+    */
+    
+    @IBAction func refresh(_ sender: Any) {
+        getConversionTable()
+        baseTextField.text = "1.0"
+        convert(sender)
+    }
+    
     @IBAction func convert(_ sender: Any) {
+    
         var resultGBP = 0.0
         var resultUSD = 0.0
         
@@ -249,6 +316,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         gbpValueLabel.text = String(format: "%.02f", resultGBP)
         usdValueLabel.text = String(format: "%.02f", resultUSD)
+    
     }
     
     /*
