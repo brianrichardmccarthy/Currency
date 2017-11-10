@@ -19,7 +19,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var convertValue:Double = 0
     
     //MARK Outlets
-    //@IBOutlet weak var convertedLabel: UILabel!
     @IBOutlet var scrollView: UIScrollView!
     
     @IBOutlet weak var baseSymbol: UILabel!
@@ -54,37 +53,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func doneClicked() {
         view.endEditing(true)
     }
-    
-    /*
-    func baseTextFieldWillAppear(notication: NSNotification) {
-        baseTextField.text = ""
-        self.scrollView.isScrollEnabled = true
-        var info = notication.userInfo!
-        let keyoardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
-        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, keyoardSize!.height, 0.0)
-        
-        self.scrollView.contentInset = contentInsets
-        self.scrollView.scrollIndicatorInsets = contentInsets
-        var aRect : CGRect = self.view.frame
-        aRect.size.height -= keyoardSize!.height
-        if let activeField = self.baseTextField {
-            if (!aRect.contains(activeField.frame.origin)) {
-                self.scrollView.scrollRectToVisible(activeField.frame, animated: true)
-            }
-        }
-        
-    }
-    
-    func baseTextFieldWillDisappear(notication: NSNotification) {
-        // ToDo convert
-        var info = notication.userInfo!
-        let keyoardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
-        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, -keyoardSize!.height, 0.0)
-        self.scrollView.contentInset = contentInsets
-        self.scrollView.scrollIndicatorInsets = contentInsets
-        self.scrollView.isScrollEnabled = false
-    }
-    */
     
     func keyboardWasShown(notification: NSNotification){
         baseTextField.text = ""
@@ -163,16 +131,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        //NotificationCenter.default.addObserver(self, selector: #selector(baseTextFieldWillAppear(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
-        // NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        //NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        // NotificationCenter.default.addObserver(self, selector: #selector(ViewController.baseTextFieldWillAppear(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        // NotificationCenter.default.addObserver(self, selector: #selector(baseTextFieldWillDisappear(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -321,43 +279,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    /*
-    func getConversionTable() {
-        //var result = "<NOTHING>"
-        
-        // let url = URL(String: "https://api.fixer.io/latest")
-        
-        let url = URL(string: "https://api.fixer.io/latest")!
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                DispatchQueue.main.async {
-                    print("Error: \(error.localizedDescription)")
-                }
-                return
-            }
-            let data = data!
-            
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                DispatchQueue.main.async {
-                    print("`Sever Error")
-                }
-                return
-            }
-            
-            if response.mimeType == "application/json",
-                let string = String (data: data, encoding: .utf8) {
-                DispatchQueue.main.async {
-                    self.
-                }
-            }
-        }
-        task.resume()
-    }
-    
-    func parseJSON(var json) {
-    }
-    */
-    
     func getConversionTableUpdated() {
         customAcitivityIndicator()
         let url = URL(string: "https://api.fixer.io/latest")!
@@ -491,13 +412,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    /*
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     
-     }
-     */
     
     @discardableResult func customAcitivityIndicator(startAnimate:Bool? = true)  {
         let mainContainter: UIView = UIView(frame: self.view.frame)

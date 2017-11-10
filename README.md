@@ -5,6 +5,8 @@ A simple iOS currency conversion app written in Swift, using the Fixer.io API (h
 
 Used as a teaching assignment for students of Waterford Institute of Technology (http://www.wit.ie).
 
+[Github link](https://github.com/brianrichardmccarthy/Currency)
+
 ---
 features | Marks | Done
 -------- | ----- | ----
@@ -13,14 +15,15 @@ AutoLayout issues resolved | 10 | done
 Decimal Keyboard, Dismissal & Obfuscation issue resolution | 10 | 2/3 done
 Nicer Activity Indicator | 10 | done
 Four Extra Currencies | 10 | done
-Other UI work | 15 | 1/3 done
-* Icons
-* Launch screen
-* General UI (inc. Autolayout)
 Updating deprecated function call | 10 | working until i have to parse json
 Extra Feature | 10 | not done
 GitHub Integration | 10 | ongoing
 Miscellaneous (code style, etc) | 10 | ongoing
+Other UI work | 15 |
+	* Icons
+	* Launch screen
+	* General UI (inc. Autolayout)
+
 
 ## Resources
 ---
